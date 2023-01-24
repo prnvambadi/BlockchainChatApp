@@ -35,8 +35,8 @@ export const ChatAppProvider = ({ children }) => {
       const connectAccount = await connectWallet();
       setAccount(connectAccount);
       //GET USER NAME
-      const userName = await contract.getUsername(connectAccount);
-      setUserName(userName);
+      // const userName = await contract.getUsername(connectAccount);
+      // setUserName(userName);
       //GET MY FRIEND LIST
       const friendLists = await contract.getMyFriendList();
       setFriendLists(friendLists);
@@ -67,7 +67,7 @@ export const ChatAppProvider = ({ children }) => {
   const createAccount = async ({ name, accountAddress }) => {
     try {
       // if (name || accountAddress)
-      //   return setError("Name And AccountAddress, cannot be emty");
+      //   return setError("Name And Account Address, cannot be empty");
 
       const contract = await connectingWithContract();
       const getCreatedUser = await contract.createAccount(name);
@@ -83,7 +83,7 @@ export const ChatAppProvider = ({ children }) => {
   //ADD YOUR FRIENDS
   const addFriends = async ({ name, accountAddress }) => {
     try {
-      // if (name || accountAddress) return setError("Please provide data");
+      if (name || accountAddress) return setError("Please provide data");
 
       const contract = await connectingWithContract();
       const addMyFriend = await contract.addFriend(accountAddress, name);
@@ -100,7 +100,7 @@ export const ChatAppProvider = ({ children }) => {
   //SEND MESSAGE TO YOUR FRIEND
   const sendMessage = async ({ msg, address }) => {
     try {
-      // if (msg || address) return setError("Please Type your Message");
+      if (msg || address) return setError("Please Type your Message");
 
       const contract = await connectingWithContract();
       const addMessage = await contract.sendMessage(address, msg);
